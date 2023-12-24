@@ -1,0 +1,28 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sentan_soft_image
+    container_name: sentan_soft_conteiner
+    ports:
+      - '3000:3000'
+    user: '${UID_GID}'
+    # env_file:
+    #   - .env
+    environment:
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./src:/app
+      # - ./public:/app/public
+      # - node_modules:/app/node_modules
+    restart: always
+    tty: true
+    stdin_open: true
+    command: sh -c 'yarn start'
+    # networks:
+    #   - supabase_sentansoft
+
+# networks:
+#   supabase_sentansoft:
+#     external: true
